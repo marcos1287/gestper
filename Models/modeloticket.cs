@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Gestper.Models;
 
 public class modeloticket
@@ -7,6 +9,7 @@ public class modeloticket
 
 public class Ticket
 {
+    [Key] 
     public int IdTicket { get; set; }
     public string Titulo { get; set; }
     public string Descripcion { get; set; }

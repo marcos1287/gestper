@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Gestper.Models;
 
 public class Usuario
 {
-    public int Idusuario { get; set; }
+    [Key]
+    public int IdUsuario { get; set; }
 
     public string Nombre { get; set; }
 

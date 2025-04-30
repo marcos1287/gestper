@@ -1,0 +1,29 @@
+@model Gestper.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label for="Correo">Correo</label>
+        <input type="email" class="form-control" id="Correo" name="Correo" asp-for="Correo" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Contrasena">Contraseña</label>
+        <input type="password" class="form-control" id="Contrasena" name="Contrasena" asp-for="Contrasena" />
+        <span asp-validation-for="Contrasena" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<a href="/Usuario/Registrar">¿No tienes cuenta? Regístrate</a>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

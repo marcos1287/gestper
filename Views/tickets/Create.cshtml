@@ -1,0 +1,57 @@
+@model Gestper.Models.Ticket
+
+@{
+    ViewData["Title"] = "Crear Ticket";
+}
+
+<h2>Crear Nuevo Ticket</h2>
+
+<form asp-action="Create" method="post">
+    <div class="form-group">
+        <label asp-for="Titulo"></label>
+        <input asp-for="Titulo" class="form-control" />
+        <span asp-validation-for="Titulo" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Descripcion"></label>
+        <textarea asp-for="Descripcion" class="form-control"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdUsuario"></label>
+        <input asp-for="IdUsuario" class="form-control" />
+        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdEstado"></label>
+        <input asp-for="IdEstado" class="form-control" />
+        <span asp-validation-for="IdEstado" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdCategoria"></label>
+        <input asp-for="IdCategoria" class="form-control" />
+        <span asp-validation-for="IdCategoria" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdPrioridad"></label>
+        <input asp-for="IdPrioridad" class="form-control" />
+        <span asp-validation-for="IdPrioridad" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IdDepartamento"></label>
+        <input asp-for="IdDepartamento" class="form-control" />
+        <span asp-validation-for="IdDepartamento" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Crear Ticket</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

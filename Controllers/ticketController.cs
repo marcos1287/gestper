@@ -4,9 +4,7 @@ using Gestper.Models;
 
 namespace Gestper.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class TicketController : ControllerBase
+    public class TicketController : Controller
     {
         private readonly IConfiguration _config;
 
@@ -15,79 +13,45 @@ namespace Gestper.Controllers
             _config = config;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        [HttpGet]
+        public IActionResult Index()
         {
-            try
-            {
-                var connectionString = _config.GetConnectionString("DefaultConnection");
-                Ticket ticket = null;
-
-                using var conn = new SqlConnection(connectionString);
-                using var cmd = new SqlCommand("SELECT * FROM Tickets WHERE IdTicket = @Id", conn);
-                cmd.Parameters.AddWithValue("@Id", id);
-
-                conn.Open();
-                using var reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    ticket = new Ticket
-                    {
-                        IdTicket = (int)reader["IdTicket"],
-                        Titulo = reader["Titulo"].ToString(),
-                        Descripcion = reader["Descripcion"].ToString(),
-                        FechaCreacion = (DateTime)reader["FechaCreacion"],
-                        IdUsuario = reader["IdUsuario"] != DBNull.Value ? (int)reader["IdUsuario"] : 0,
-                        IdEstado = reader["IdEstado"] != DBNull.Value ? (int)reader["IdEstado"] : 0,
-                        IdCategoria = reader["IdCategoria"] != DBNull.Value ? (int)reader["IdCategoria"] : 0,
-                        IdPrioridad = reader["IdPrioridad"] != DBNull.Value ? (int)reader["IdPrioridad"] : 0,
-                        IdDepartamento = reader["IdDepartamento"] != DBNull.Value ? (int)reader["IdDepartamento"] : 0
-                    };
-                }
-
-                return ticket == null ? NotFound() : Ok(ticket);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error interno: {ex.Message}");
-            }
+            return View("Views/tickets/tickets.cshtml");
         }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult Create()
         {
-            try
-            {
-                var tickets = new List<Ticket>();
-                var connectionString = _config.GetConnectionString("DefaultConnection");
+            return View("Views/tickets/Create.cshtml");
+        }
 
-                using var conn = new SqlConnection(connectionString);
-                using var cmd = new SqlCommand("SELECT * FROM Tickets", conn);
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Ticket ticket)
+        {
+            if (!ModelState.IsValid)
+                return View(ticket);
 
-                conn.Open();
-                using var reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    tickets.Add(new Ticket
-                    {
-                        IdTicket = (int)reader["IdTicket"],
-                        Titulo = reader["Titulo"].ToString(),
-                        Descripcion = reader["Descripcion"].ToString(),
-                        FechaCreacion = (DateTime)reader["FechaCreacion"],
-                        IdUsuario = reader["IdUsuario"] != DBNull.Value ? (int)reader["IdUsuario"] : 0,
-                        IdEstado = reader["IdEstado"] != DBNull.Value ? (int)reader["IdEstado"] : 0,
-                        IdCategoria = reader["IdCategoria"] != DBNull.Value ? (int)reader["IdCategoria"] : 0,
-                        IdPrioridad = reader["IdPrioridad"] != DBNull.Value ? (int)reader["IdPrioridad"] : 0,
-                        IdDepartamento = reader["IdDepartamento"] != DBNull.Value ? (int)reader["IdDepartamento"] : 0
-                    });
-                }
+            var connectionString = _config.GetConnectionString("DefaultConnection");
+            using var conn = new SqlConnection(connectionString);
+            using var cmd = new SqlCommand(@"
+                INSERT INTO Tickets (Titulo, Descripcion, FechaCreacion, IdUsuario, IdEstado, IdCategoria, IdPrioridad, IdDepartamento)
+                VALUES (@Titulo, @Descripcion, @FechaCreacion, @IdUsuario, @IdEstado, @IdCategoria, @IdPrioridad, @IdDepartamento)", conn);
 
-                return Ok(tickets);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Error interno: {ex.Message}");
-            }
+            cmd.Parameters.AddWithValue("@Titulo", ticket.Titulo);
+            cmd.Parameters.AddWithValue("@Descripcion", ticket.Descripcion);
+            cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
+            cmd.Parameters.AddWithValue("@IdUsuario", ticket.IdUsuario);
+            cmd.Parameters.AddWithValue("@IdEstado", ticket.IdEstado);
+            cmd.Parameters.AddWithValue("@IdCategoria", ticket.IdCategoria);
+            cmd.Parameters.AddWithValue("@IdPrioridad", ticket.IdPrioridad);
+            cmd.Parameters.AddWithValue("@IdDepartamento", ticket.IdDepartamento);
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+
+            return RedirectToAction("Index");
         }
     }
 }
+

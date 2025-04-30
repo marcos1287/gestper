@@ -1,0 +1,40 @@
+@model List<Gestper.Models.Ticket>
+
+@{
+    ViewData["Title"] = "Listado de Tickets";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mb-4">Listado de Tickets</h2>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Usuario</th>
+        <th>Estado</th>
+        <th>Categoría</th>
+        <th>Prioridad</th>
+        <th>Departamento</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var ticket in Model)
+    {
+        <tr>
+            <td>@ticket.IdTicket</td>
+            <td>@ticket.Titulo</td>
+            <td>@ticket.Descripcion</td>
+            <td>@ticket.FechaCreacion.ToString("yyyy-MM-dd")</td>
+            <td>@ticket.IdUsuario</td>
+            <td>@ticket.IdEstado</td>
+            <td>@ticket.IdCategoria</td>
+            <td>@ticket.IdPrioridad</td>
+            <td>@ticket.IdDepartamento</td>
+        </tr>
+    }
+    </tbody>
+</table>

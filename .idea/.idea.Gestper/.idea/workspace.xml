@@ -9,22 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa2bc1d8-73aa-496d-9656-a66fd203cf31" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Controllers/UsuarioController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Data/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw/schema/dbo.sYMBAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/master.YiqNvw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/master.YiqNvw/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/master.YiqNvw/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gestper.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Gestper.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gestper.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Gestper.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/modelousuario.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/modelousuario.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +31,7 @@
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {}
+
 }</component>
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
@@ -71,22 +57,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;.NET Launch Settings Profile.Gestper: http.executor&quot;: &quot;Run&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [

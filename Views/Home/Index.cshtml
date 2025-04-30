@@ -1,8 +1,176 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Gestper - Sistema de Gestión de Personal";
+    Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h1 class="display-4 fw-bold text-primary">Gestper</h1>
+                <p class="lead">Sistema integral de gestión de personal para empresas modernas</p>
+                <p class="mb-4">Optimice sus procesos de recursos humanos con nuestra plataforma intuitiva y potente.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Comenzar ahora</button>
+                    <button type="button" class="btn btn-outline-primary btn-lg px-4">Saber más</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="~/images/hero-image.png" alt="Gestper Dashboard" class="img-fluid rounded shadow" />
+            </div>
+        </div>
+    </div>
 </div>
+
+<div class="features-section py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 text-primary">Características principales</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h3 class="card-title h5">Gestión de empleados</h3>
+                        <p class="card-text">Administre toda la información de sus empleados en un solo lugar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <h3 class="card-title h5">Control de asistencia</h3>
+                        <p class="card-text">Seguimiento preciso de horarios, vacaciones y permisos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient text-white rounded-circle mb-3">
+                            <i class="bi bi-graph-up"></i>
+                        </div>
+                        <h3 class="card-title h5">Informes y análisis</h3>
+                        <p class="card-text">Obtenga insights valiosos con nuestros reportes personalizables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="testimonials-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 text-primary">Lo que dicen nuestros clientes</h2>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"Gestper ha transformado nuestra gestión de recursos humanos. Ahora todo es más eficiente y nuestro equipo está más satisfecho."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="rounded-circle bg-primary text-white testimonial-avatar">
+                                JD
+                            </div>
+                            <div class="ms-3">
+                                <h5 class="mb-0">Juan Díaz</h5>
+                                <p class="text-muted mb-0">Director de RRHH, Empresa ABC</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">"La implementación fue rápida y el soporte técnico es excelente. Recomiendo Gestper a cualquier empresa que quiera mejorar su gestión de personal."</p>
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="rounded-circle bg-primary text-white testimonial-avatar">
+                                ML
+                            </div>
+                            <div class="ms-3">
+                                <h5 class="mb-0">María López</h5>
+                                <p class="text-muted mb-0">Gerente General, Empresa XYZ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">¿Listo para optimizar la gestión de su personal?</h2>
+        <p class="lead mb-4">Únase a cientos de empresas que ya confían en Gestper</p>
+        <button class="btn btn-light btn-lg px-4">Solicitar una demo</button>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .hero-section {
+            padding: 5rem 0;
+            background-color: #f8f9fa;
+        }
+        
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 4rem;
+            height: 4rem;
+            font-size: 2rem;
+        }
+        
+        .testimonial-avatar {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Colores personalizados para Gestper */
+        :root {
+            --bs-primary: #0056b3;
+            --bs-primary-rgb: 0, 86, 179;
+        }
+        
+        .bg-primary {
+            background-color: var(--bs-primary) !important;
+        }
+        
+        .text-primary {
+            color: var(--bs-primary) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        
+        .btn-outline-primary {
+            color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--bs-primary);
+            border-color: var(--bs-primary);
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        // Aquí puedes agregar JavaScript personalizado si es necesario
+    </script>
+}

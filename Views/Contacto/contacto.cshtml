@@ -1,0 +1,45 @@
+@model Gestper.Models.ContactoViewModel
+
+@{
+    ViewBag.Title = "Contáctanos";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="text-primary mb-4">Contáctanos</h1>
+            <p class="mb-4">¿Tienes dudas? Completa el siguiente formulario y te responderemos a la brevedad.</p>
+
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alert alert-success">@ViewBag.Mensaje</div>
+            }
+
+            <form asp-action="Contacto" method="post" class="needs-validation" novalidate>
+                <div class="mb-3">
+                    <label asp-for="Nombre" class="form-label fw-semibold"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Correo" class="form-label fw-semibold"></label>
+                    <input asp-for="Correo" class="form-control" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Mensaje" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Mensaje" class="form-control" rows="5"></textarea>
+                    <span asp-validation-for="Mensaje" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary px-4">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

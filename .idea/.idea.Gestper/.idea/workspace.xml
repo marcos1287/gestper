@@ -9,16 +9,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa2bc1d8-73aa-496d-9656-a66fd203cf31" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Controllers/ticketController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modeldepartamento.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modeloarchivoadjunto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modeloasignacion.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modeloestado.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modeloprioridad.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modeloticket.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Models/modelousuario.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ticketController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ticketController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/modeloticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/modeloticket.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +35,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;BenjaminLillo203&quot;
-  }
-}</component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {}
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/CesarValenzuela157/gestper.git&quot;,
@@ -52,6 +46,10 @@
 }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="SWEA" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -71,7 +69,7 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "roles",
+    "git-widget-placeholder": "avance",
     "ignore.virus.scanning.warn.message": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -83,8 +81,8 @@
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
-      "sqlserver",
-      "sqlserver.localdb"
+      "sqlserver.localdb",
+      "sqlserver"
     ]
   }
 }]]></component>
@@ -135,6 +133,7 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

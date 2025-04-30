@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3b3f3eb3-0d8b-4c14-8e12-79297b665e20" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Views/tickets/Create.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Views/tickets/tickets.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ticketController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ticketController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/_ViewImports.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Views/_ViewImports.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
+    </list>
+    <list id="125f38e9-7d58-4279-8fb3-5280c6a55254" name="Changes by Cesar" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    ".NET Launch Settings Profile.Gestper: http.executor": "Run",
+    "git-widget-placeholder": "master",
+    "node.js.selected.package.tslint": "(autodetect)"
+  }
+}]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Gestper: http">
     <configuration name="Gestper: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Gestper.csproj" />
@@ -32,4 +65,9 @@
       </method>
     </configuration>
   </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
 </project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="47bf4bc1-da67-40b6-9c0e-e34bc713a117" name="@localhost (DDL) Mapping">
+      <data-sources db="dc3829cd-bbb0-4564-8c59-163f08cdd073" ddl="45178803-4ea9-4108-9302-dd267ce9a1b6" />
+      <scope>
+        <node kind="database" qname="MesaAyudaSistema" />
+      </scope>
+    </mapping>
+  </component>
+</project>

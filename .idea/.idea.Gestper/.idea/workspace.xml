@@ -9,12 +9,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa2bc1d8-73aa-496d-9656-a66fd203cf31" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Controllers/UsuarioController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data/ApplicationDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw/schema/dbo.sYMBAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/MesaAyudaSistema.bh3mQw/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/master.YiqNvw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/master.YiqNvw/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/dataSources/d1e07a91-88c6-4fa5-b815-b8da92b34dc2/storage_v2/_src_/database/master.YiqNvw/schema/sys.zb4BAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gestper/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ticketController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ticketController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/modeloticket.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/modeloticket.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestper.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Gestper.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gestper.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/Gestper.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Models/modelousuario.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Models/modelousuario.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,21 +44,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {}
-}]]></component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/CesarValenzuela157/gestper.git&quot;,
-    &quot;accountId&quot;: &quot;0da4fe0f-f852-4aed-b6a2-0a72fc0bdee1&quot;
-  }
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
 }</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/CesarValenzuela157/gestper.git",
+    "accountId": "8f9cdb66-df41-4d16-9fa0-2bea1451860c"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bd1d5c50194fea68ff3559c160230b0ab50f5acf4ce3061bffd6d62958e2182/ExceptionDispatchInfo.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="SWEA" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -62,30 +71,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Gestper: http.executor": "Run",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "avance",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Gestper: http.executor&quot;: &quot;Run&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlserver.localdb",
-      "sqlserver"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlserver.localdb&quot;,
+      &quot;sqlserver&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Gestper: http">
     <configuration name="Gestper: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Gestper.csproj" />
@@ -127,6 +136,7 @@
       <updated>1745966966378</updated>
       <workItem from="1745966967881" duration="4453000" />
       <workItem from="1745973480495" duration="4499000" />
+      <workItem from="1745983261070" duration="1794000" />
     </task>
     <servers />
   </component>

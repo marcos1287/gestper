@@ -37,7 +37,7 @@ namespace Gestper.Controllers
                 return RedirectToAction("Index", "Home"); // Redirige a la página principal después de registrarse
             }
 
-            return View(usuario); // Si hay errores, se vuelve a mostrar el formulario
+            return View("Views/registro/registro.layout.cshtml"); // Si hay errores, se vuelve a mostrar el formulario
         }
 
         // GET: Usuario/Login
@@ -46,7 +46,7 @@ namespace Gestper.Controllers
             return View("Views/login/login.layout.cshtml");
         }
 
-        // POST: Usuario/Login
+        // POST: Usuario/Login con LoginViewModel
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
@@ -58,15 +58,17 @@ namespace Gestper.Controllers
                     .FirstOrDefaultAsync(u => u.Correo == model.Correo);
 
                 // Si el usuario existe
-                if (usuario != null)
+                if (ModelState.IsValid)
                 {
                     // Verificar la contraseña (deberías encriptar las contraseñas en un entorno real)
                     if (usuario.Contrasena == model.Contrasena)
                     {
-                        // Aquí puedes guardar información del usuario en la sesión, cookies o JWT
+                        // Guardar información del usuario en la sesión
+                        HttpContext.Session.SetString("UsuarioCorreo", usuario.Correo);
+                        HttpContext.Session.SetString("UsuarioId", usuario.IdUsuario.ToString());
 
-                        // Redirigir a la página principal o dashboard si el login es exitoso
-                        return RedirectToAction("Index", "Home");
+                        // Redirigir al perfil del usuario
+                        return RedirectToAction("Index", "Perfil");
                     }
                     else
                     {
@@ -82,7 +84,7 @@ namespace Gestper.Controllers
             }
 
             // Si algo falla, volvemos a mostrar el formulario de login con el error
-            return View(model);
+            return View("Views/login/login.layout.cshtml", model);
         }
     }
 }

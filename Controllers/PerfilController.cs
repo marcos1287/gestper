@@ -33,6 +33,61 @@ namespace Gestper.Controllers
 
             return RedirectToAction("Login", "Usuario"); // Si no hay usuario en sesión, redirige al login
         }
+        public async Task<IActionResult> Editar()
+        {
+            var usuarioCorreo = HttpContext.Session.GetString("UsuarioCorreo");
+
+            if (usuarioCorreo != null)
+            {
+                var usuario = await _context.Usuarios
+                    .FirstOrDefaultAsync(u => u.Correo == usuarioCorreo);
+
+                if (usuario != null)
+                {
+                    return View(usuario);
+                }
+            }
+
+            return RedirectToAction("Login", "Usuario");
+        }
+       
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editar(Usuario usuarioEditado)
+        {
+            ModelState.Remove("Contraseña");
+            
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var usuarioExistente = await _context.Usuarios
+                        .FirstOrDefaultAsync(u => u.IdUsuario == usuarioEditado.IdUsuario);
+
+                    if (usuarioExistente != null)
+                    {
+                        usuarioExistente.Nombre = usuarioEditado.Nombre;
+                        usuarioExistente.Apellido = usuarioEditado.Apellido;
+                        usuarioExistente.Correo = usuarioEditado.Correo;
+                        usuarioExistente.Telefono = usuarioEditado.Telefono;
+                        
+                        
+                        await _context.SaveChangesAsync();
+                        TempData["Mensaje"] = "Perfil actualizado correctamente";
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "No se encontró el usuario");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error al actualizar: " + ex.Message);
+                }
+            }
+            
+            return View(usuarioEditado);
+        }
     }
 }
-

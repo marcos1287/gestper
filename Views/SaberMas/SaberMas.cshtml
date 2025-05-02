@@ -1,0 +1,54 @@
+
+@{
+    ViewBag.Title = "SaberMás";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 rounded-lg mb-5">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center font-weight-bold my-3">GESTPER</h2>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <span class="badge bg-primary p-2 mb-3">Soluciones Empresariales</span>
+                    </div>
+                    
+                    <p class="lead text-center mb-4">
+                        <strong class="text-primary">GESTPER</strong> es más una TI, 
+                        <span class="text-success">conlleva una asesoría y consultoría</span> para 
+                        <span class="text-info">generar soluciones</span> que apoyen la toma de 
+                        <span class="text-warning">decisiones empresariales</span> en 
+                        <span class="text-danger">tiempo real</span>, adaptándose a la 
+                        <span class="text-primary">estructura organizacional</span> de la 
+                        <span class="text-success">empresa</span>, con 
+                        <span class="text-info">rapidez</span>.
+                    </p>
+                    
+                    <hr class="my-4">
+                    
+                    <p class="lead text-center">
+                        <strong class="text-primary">GESTPER</strong>, mediante la 
+                        <span class="text-success">digitalización</span> de todos los 
+                        <span class="text-info">procesos</span> en la gestión de 
+                        <span class="text-warning">recursos humanos</span>, permite la 
+                        <span class="text-danger">integración</span> de la 
+                        <span class="text-primary">estructura organizacional</span> en forma transversal.
+                    </p>
+                    
+                    <div class="text-center mt-4">
+                        <a href="@Url.Action("Index", controller: "Home")" class="btn btn-primary btn-lg px-4 shadow-sm">
+                            <i class="bi bi-house-door me-2"></i>Volver al inicio
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer text-center py-3 bg-light">
+                    <small class="text-muted">© @DateTime.Now.Year - GESTPER - Soluciones empresariales</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

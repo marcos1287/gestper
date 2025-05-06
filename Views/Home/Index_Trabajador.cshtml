@@ -1,7 +1,7 @@
-@model List<Gestper.Models.TicketAdmin>
+@model List<Gestper.Models.Ticket>
+
 @{
     Layout = null;
-    
 }
 
 <!DOCTYPE html>
@@ -10,7 +10,6 @@
     <meta charset="UTF-8">
     <title>Gestper</title>
     <style>
-        
         html, body {
             margin: 0;
             padding: 0;
@@ -117,22 +116,22 @@
             border-bottom: 1px solid #ccc;
         }
 
-        .filters input {
+        .filters input,
+        .filters select {
             padding: 6px 15px;
             border-radius: 100px;
             border: 1px solid #999;
             box-shadow: none;
+        }
+
+        .filters input {
             width: 200px;
         }
 
         .filters select {
-            padding: 6px;
-            border-radius: 100px; /* Ovalado */
-            border: 1px solid #999;
             width: 160px;
-            font-family: Arial, sans-serif;
         }
-        
+
         .tickets {
             padding: 20px;
             overflow-y: auto;
@@ -177,12 +176,6 @@
             background-color: #f0f0f0;
         }
 
-        .arrow {
-            float: right;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
         .ticket-metadata {
             display: flex;
             justify-content: space-between;
@@ -199,7 +192,7 @@
         .ticket-title {
             font-weight: bold;
             font-size: 16px;
-            margin-top: 25px; /* Añadido espacio */
+            margin-top: 25px;
             margin-bottom: 4px;
         }
 
@@ -218,19 +211,19 @@
 
     <div class="status-bar">
         <div class="ticket-summary">
-            <div class="count"><strong>3</strong></div>
+            <div class="count"><strong>@Model.Count</strong></div>
             <div class="label">TODOS LOS TICKETS</div>
         </div>
         <div class="ticket-summary">
-            <div class="count"><strong>3</strong></div>
-            <div class="label">TICKETS NUEVOS ASIGNADOS</div>
+            <div class="count"><strong>@Model.Count(t => t.IdEstado == 1)</strong></div>
+            <div class="label">TICKETS NUEVOS</div>
         </div>
         <div class="ticket-summary">
-            <div class="count"><strong>1</strong></div>
+            <div class="count"><strong>@Model.Count(t => t.IdEstado == 2)</strong></div>
             <div class="label">EN PROGRESO</div>
         </div>
         <div class="ticket-summary">
-            <div class="count"><strong>1</strong></div>
+            <div class="count"><strong>@Model.Count(t => t.IdEstado == 3)</strong></div>
             <div class="label">CERRADOS</div>
         </div>
     </div>
@@ -241,7 +234,7 @@
                 <span>Todos los tickets</span>
                 <span class="arrow-sidebar">›</span>
             </div>
-            <div class="sidebar-item logout">
+            <div class="sidebar-item logout" onclick="window.location.href = '/Account/Logout'">
                 <span class="logout-icon">⮐</span>
                 <span>Cerrar sesión</span>
             </div>
@@ -270,18 +263,17 @@
             <div class="tickets">
                 @foreach (var ticket in Model)
                 {
-                    <a href="@Url.Action("Detalle", "Home", new { id = ticket.Id })" class="ticket-link">
-
+                    <a href="@Url.Action("Detalle", "Trabajador", new { id = ticket.IdTicket })" class="ticket-link">
                         <div class="ticket">
                             <div class="ticket-content">
                                 <div class="ticket-info">
                                     <div class="ticket-metadata">
-                                        <span><strong>Ticket ID:</strong> @ticket.Id</span>
-                                        <span><strong>Creado por:</strong> @ticket.CreadoPor</span>
-                                        <span><strong>Hora de creación:</strong> @ticket.FechaCreacion.ToString("HH:mm")</span>
-                                        <span><strong>Fecha de creación:</strong> @ticket.FechaCreacion.ToString("dd-MM-yyyy")</span>
+                                        <span><strong>ID:</strong> @ticket.IdTicket</span>
+                                        <span><strong>Usuario:</strong> @ticket.IdUsuario</span>
+                                        <span><strong>Hora:</strong> @ticket.FechaCreacion.ToString("HH:mm")</span>
+                                        <span><strong>Fecha:</strong> @ticket.FechaCreacion.ToString("dd-MM-yyyy")</span>
                                     </div>
-                                    <div class="ticket-title">@ticket.NombreConsulta</div>
+                                    <div class="ticket-title">@ticket.Titulo</div>
                                     <div class="ticket-description">@ticket.Descripcion</div>
                                 </div>
                                 <div class="ticket-arrow">›</div>
@@ -292,17 +284,5 @@
             </div>
         </div>
     </div>
-
-    <!--
-    <script>
-        document.querySelector('.logout').addEventListener('click', function () {
-            // Intentar cerrar la ventana (solo funcionará si fue abierta por script)
-            window.close();
-
-            // Alternativamente, redireccionar al login (esto sí funcionará siempre)
-            // window.location.href = "/login"; // Reemplazá "/login" con la ruta de tu login
-        });
-    </script>
-    -->
 </body>
 </html>

@@ -2,9 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Gestper.Models;
 
-public class Estados
+public class Estado
 {
-    [Key]
-    public int IdEstado { get; set; }
-    public string NombreEstado { get; set; }
+    [Key] public int IdEstado { get; set; }
+    public string NombreEstados { get; set; }
 }

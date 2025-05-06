@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data.SqlClient;
 using Gestper.Models;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
 
 namespace Gestper.Controllers
 {
@@ -15,6 +18,7 @@ namespace Gestper.Controllers
             _config = config;
         }
 
+        // Obtener ticket por ID
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -53,6 +57,7 @@ namespace Gestper.Controllers
             }
         }
 
+        // Obtener todos los tickets
         [HttpGet]
         public IActionResult GetAll()
         {

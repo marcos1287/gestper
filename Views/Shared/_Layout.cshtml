@@ -38,7 +38,6 @@
                         <a class="nav-link" asp-controller="Caracteristicas" asp-action="Caracteristicas">Carateristicas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Precios" asp-action="Precios">Precios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Nosotros" asp-action="Nosotros">Nosotros</a>
@@ -51,9 +50,6 @@
                     </li>
                     <li class="nav-item ms-lg-3">
                         <a class="btn btn-primary" asp-controller="Ticket" asp-action="Create">Soporte</a>
-                    </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-primary" asp-controller="Usuario" asp-action="Login">Iniciar sesión</a>
                     </li>
                 </ul>
             </div>
@@ -75,7 +71,7 @@
             <div class="col-md-2 mb-4 mb-md-0">
                 <h5>Empresa</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-decoration-none">Nosotros</a></li>
+                    <a class="nav-link text-decoration-none link-primary" asp-controller="Nosotros" asp-action="Nosotros">Nosotros</a>
                     <li><a href="#" class="text-decoration-none">Equipo</a></li>
                     <li><a href="#" class="text-decoration-none">Carreras</a></li>
                 </ul>
@@ -85,7 +81,7 @@
                 <ul class="list-unstyled">
                     <li><a href="#" class="text-decoration-none">Blog</a></li>
                     <li><a href="#" class="text-decoration-none">Documentación</a></li>
-                    <li><a href="#" class="text-decoration-none">Soporte</a></li>
+                    <li><a class="nav-link text-decoration-none link-primary" asp-controller="Ticket" asp-action="Create">Soporte</a></li>
                 </ul>
             </div>
             <div class="col-md-4">

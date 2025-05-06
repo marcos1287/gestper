@@ -5,7 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET](https://img.shields.io/badge/.NET-9-512BD4)](https://dotnet.microsoft.com/download)
 
-
+<p align="center">
+  <img src="https://via.placeholder.com/650x300" alt="Gestper Dashboard" width="650">
+</p>
 
 ## 📖 Descripción
 
@@ -46,7 +48,7 @@ Gestper/
 
 Para trabajar con este proyecto, necesitarás tener instalado:
 
-- [.NET SDK](https://dotnet.microsoft.com/download) (.NET 6.0 o superior)
+- [.NET SDK](https://dotnet.microsoft.com/download) (.NET 9)
 - [GitHub Desktop](https://desktop.github.com/)
 - [JetBrains Rider](https://www.jetbrains.com/rider/) o [Visual Studio](https://visualstudio.microsoft.com/)
 - Una cuenta en GitHub
@@ -173,6 +175,13 @@ git checkout feature/nueva-funcionalidad
 git merge main
 ```
 
+## 📱 Capturas de Pantalla
+
+<p align="center">
+  <img src="https://via.placeholder.com/400x225" alt="Login Screen" width="400">
+  <img src="https://via.placeholder.com/400x225" alt="Employee Dashboard" width="400">
+</p>
+
 ## 📚 Recursos Adicionales
 
 - [Documentación de ASP.NET Core](https://docs.microsoft.com/es-es/aspnet/core/)
@@ -186,5 +195,5 @@ Este proyecto está bajo la [Licencia MIT](LICENSE).
 
 
 <p align="center">
-  Desarrollado con ❤️ como parte de un proyecto universitario
+  Desarrollado como parte de un proyecto universitario
 </p>

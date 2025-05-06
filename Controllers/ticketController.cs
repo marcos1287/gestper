@@ -1,88 +1,52 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
 using Gestper.Models;
+using Gestper.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Linq;
 
 namespace Gestper.Controllers
 {
     public class TicketController : Controller
     {
-        private readonly IConfiguration _config;
+        private readonly ApplicationDbContext _context;
 
-        public TicketController(IConfiguration config)
+        public TicketController(ApplicationDbContext context)
         {
-            _config = config;
+            _context = context;
         }
 
-        //[HttpGet]
-        //public IActionResult Index()
-        //{
-        //    return View("Views/tickets/tickets.cshtml");
-        //}
-
-        [HttpGet]
-        public IActionResult Create()
+        // Método para obtener el ID del usuario actual desde los claims
+        private int ObtenerIdUsuarioActual()
         {
-            return View("Views/tickets/Create.cshtml");
+            // Accede al ID del usuario autenticado desde el claim "NameIdentifier"
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Si no se puede obtener el ID (usuario no autenticado), retorna 0
+            return string.IsNullOrEmpty(userId) ? 0 : int.Parse(userId);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Ticket ticket)
+        // Mostrar todos los tickets que corresponden al cliente
+        public IActionResult MisTickets()
         {
-            if (!ModelState.IsValid)
-                return View(ticket);
+            int idUsuario = ObtenerIdUsuarioActual(); // Llamada al método para obtener el ID del usuario actual
 
-            var connectionString = _config.GetConnectionString("DefaultConnection");
-            using var conn = new SqlConnection(connectionString);
-            using var cmd = new SqlCommand(@"
-                INSERT INTO Tickets (Titulo, Descripcion, FechaCreacion, IdUsuario, IdEstado, IdCategoria, IdPrioridad, IdDepartamento)
-                VALUES (@Titulo, @Descripcion, @FechaCreacion, @IdUsuario, @IdEstado, @IdCategoria, @IdPrioridad, @IdDepartamento)", conn);
-
-            cmd.Parameters.AddWithValue("@Titulo", ticket.Titulo);
-            cmd.Parameters.AddWithValue("@Descripcion", ticket.Descripcion);
-            cmd.Parameters.AddWithValue("@FechaCreacion", DateTime.Now);
-            cmd.Parameters.AddWithValue("@IdUsuario", ticket.IdUsuario);
-            cmd.Parameters.AddWithValue("@IdEstado", ticket.IdEstado);
-            cmd.Parameters.AddWithValue("@IdCategoria", ticket.IdCategoria);
-            cmd.Parameters.AddWithValue("@IdPrioridad", ticket.IdPrioridad);
-            cmd.Parameters.AddWithValue("@IdDepartamento", ticket.IdDepartamento);
-
-            conn.Open();
-            cmd.ExecuteNonQuery();
-
-            return RedirectToAction("Index");
-        }
-        
-        [HttpGet]
-        public IActionResult Index()
-        {
-            var tickets = new List<Ticket>();
-            var connectionString = _config.GetConnectionString("DefaultConnection");
-
-            using var conn = new SqlConnection(connectionString);
-            using var cmd = new SqlCommand("SELECT * FROM Tickets", conn);
-
-            conn.Open();
-            using var reader = cmd.ExecuteReader();
-            while (reader.Read())
+            // Si no se pudo obtener el ID del usuario (usuario no autenticado)
+            if (idUsuario == 0)
             {
-                tickets.Add(new Ticket
-                {
-                    IdTicket = (int)reader["IdTicket"],
-                    Titulo = reader["Titulo"].ToString(),
-                    Descripcion = reader["Descripcion"].ToString(),
-                    FechaCreacion = (DateTime)reader["FechaCreacion"],
-                    IdUsuario = reader["IdUsuario"] != DBNull.Value ? (int)reader["IdUsuario"] : 0,
-                    IdEstado = reader["IdEstado"] != DBNull.Value ? (int)reader["IdEstado"] : 0,
-                    IdCategoria = reader["IdCategoria"] != DBNull.Value ? (int)reader["IdCategoria"] : 0,
-                    IdPrioridad = reader["IdPrioridad"] != DBNull.Value ? (int)reader["IdPrioridad"] : 0,
-                    IdDepartamento = reader["IdDepartamento"] != DBNull.Value ? (int)reader["IdDepartamento"] : 0
-                });
+                return Unauthorized(); // O redirige según sea necesario (puedes también usar RedirectToAction)
             }
 
-            return View("Views/Tickets/tickets.cshtml", tickets);
+            // Filtra los tickets donde el IdUsuario sea igual al ID del usuario autenticado
+            var ticketsCliente = _context.Tickets
+                .Include(t => t.Estado) // Si quieres mostrar el nombre del estado
+                .Where(t => t.IdUsuario == idUsuario)
+                .ToList();
+
+            // Retorna la vista con los tickets filtrados
+            return View("~/Views/CRUD/crud.ticket.cliente.cshtml", ticketsCliente);
         }
 
+        // Otros métodos del controlador Ticket (Ej. Create, Edit, Delete) pueden ir aquí
     }
 }
-

@@ -1,0 +1,146 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Panel CRUD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+        }
+
+        .sidebar {
+            width: 220px;
+            background-color: #007BFF;
+            color: white;
+            height: 100vh;
+            padding-top: 20px;
+            position: fixed;
+        }
+
+        .sidebar a {
+            display: block;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #0056b3;
+        }
+
+        .main {
+            margin-left: 220px;
+            padding: 20px;
+            flex-grow: 1;
+            background-color: #f0f8ff;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .navbar .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .logout-button {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+            background-color: white;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra lateral -->
+    <div class="sidebar">
+        <h3 style="text-align: center;">Gestper</h3>
+        <a href="#">Dashboard</a>
+        <a href="#">Tickets</a>
+        <a href="#">Reportes</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="main">
+        <!-- Navbar superior -->
+        <div class="navbar">
+            <div class="nav-links">
+                <a asp-controller="Perfil" asp-action="">Perfil</a>
+                <a asp-controller="Ticket" asp-action="Index">Ticket</a>
+                <a asp-controller="Ticket" asp-action="MisTickets">Lista de Tickets</a>
+
+            </div>
+            <form method="post" asp-controller="Usuario" asp-action="CerrarSesion">
+                <button type="submit" class="logout-button">Cerrar sesión</button>
+            </form>
+        </div>
+
+        <!-- Tabla CRUD de ejemplo -->
+        <h2>Gestión de Tickets</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Asunto</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se insertarán los datos dinámicamente -->
+                <tr>
+                    <td>1</td>
+                    <td>Problema con login</td>
+                    <td>Abierto</td>
+                    <td>
+                        <button>Editar</button>
+                        <button>Eliminar</button>
+                    </td>
+                </tr>
+                <!-- Más filas aquí -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -68,7 +68,7 @@ namespace Gestper.Controllers
                         HttpContext.Session.SetString("UsuarioId", usuario.IdUsuario.ToString());
 
                         // Redirigir al perfil del usuario
-                        return RedirectToAction("Index", "Perfil");
+                        return RedirectToAction("Index", "CRUD");
                     }
                     else
                     {
@@ -85,6 +85,12 @@ namespace Gestper.Controllers
 
             // Si algo falla, volvemos a mostrar el formulario de login con el error
             return View("Views/login/login.layout.cshtml", model);
+        }
+        [HttpPost]
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Usuario");
         }
     }
 }

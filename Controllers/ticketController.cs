@@ -1,8 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Gestper.Models;
 using Gestper.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Gestper.Services;
+using System.Threading.Tasks;
+using System;
 using System.Linq;
 
 namespace Gestper.Controllers
@@ -10,43 +14,168 @@ namespace Gestper.Controllers
     public class TicketController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmailService _emailService;
 
-        public TicketController(ApplicationDbContext context)
+        public TicketController(ApplicationDbContext context, IEmailService emailService)
         {
             _context = context;
+            _emailService = emailService;
         }
 
-        // Método para obtener el ID del usuario actual desde los claims
         private int ObtenerIdUsuarioActual()
         {
-            // Accede al ID del usuario autenticado desde el claim "NameIdentifier"
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            // Si no se puede obtener el ID (usuario no autenticado), retorna 0
             return string.IsNullOrEmpty(userId) ? 0 : int.Parse(userId);
         }
 
-        // Mostrar todos los tickets que corresponden al cliente
+        public async Task<IActionResult> Index()
+        {
+            var tickets = await _context.Tickets
+                .Include(t => t.IdEstado)
+                .Include(t => t.IdCategoria)
+                .Include(t => t.IdPrioridad)
+                .Include(t => t.IdDepartamento)
+                .ToListAsync();
+
+            return View(tickets);
+        }
+
         public IActionResult MisTickets()
         {
-            int idUsuario = ObtenerIdUsuarioActual(); // Llamada al método para obtener el ID del usuario actual
+            
+            int idUsuario = ObtenerIdUsuarioActual();
+            if (idUsuario == 0) return Unauthorized();
 
-            // Si no se pudo obtener el ID del usuario (usuario no autenticado)
-            if (idUsuario == 0)
-            {
-                return Unauthorized(); // O redirige según sea necesario (puedes también usar RedirectToAction)
-            }
-
-            // Filtra los tickets donde el IdUsuario sea igual al ID del usuario autenticado
             var ticketsCliente = _context.Tickets
-                .Include(t => t.Estado) // Si quieres mostrar el nombre del estado
+                .Include(t => t.Estados)
+                .Include(t => t.IdCategoria)
+                .Include(t => t.IdPrioridad)
+                .Include(t => t.IdDepartamento)
                 .Where(t => t.IdUsuario == idUsuario)
                 .ToList();
 
-            // Retorna la vista con los tickets filtrados
-            return View("~/Views/CRUD/crud.ticket.cliente.cshtml", ticketsCliente);
+            
+            if (!ticketsCliente.Any())
+            {
+               
+                return RedirectToAction("Views/tickets/Create.cshtml", "Ticket");
+            }
+
+            return View(ticketsCliente);
         }
 
-        // Otros métodos del controlador Ticket (Ej. Create, Edit, Delete) pueden ir aquí
+        public async Task<IActionResult> Edit(int id)
+        {
+            var ticket = await _context.Tickets
+                .Include(t => t.Estados)
+                .Include(t => t.Categorias)
+                .Include(t => t.Prioridades)
+                .Include(t => t.Departamentos)
+                .FirstOrDefaultAsync(t => t.IdTicket == id);
+
+            if (ticket == null) return NotFound();
+
+            ViewBag.Estados = new SelectList(await _context.Estados.ToListAsync(), "IdEstado", "Nombre", ticket.IdEstado);
+            ViewBag.Categorias = new SelectList(await _context.Categorias.ToListAsync(), "IdCategoria", "Nombre", ticket.IdCategoria);
+            ViewBag.Prioridades = new SelectList(await _context.Prioridades.ToListAsync(), "IdPrioridad", "Nombre", ticket.IdPrioridad);
+            ViewBag.Departamentos = new SelectList(await _context.Departamentos.ToListAsync(), "IdDepartamento", "Nombre", ticket.IdDepartamento);
+
+            return View(ticket);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Ticket ticket)
+        {
+            if (id != ticket.IdTicket) return NotFound();
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(ticket);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_context.Tickets.Any(e => e.IdTicket == id))
+                        return NotFound();
+                    else
+                        throw;
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(ticket);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var ticket = await _context.Tickets.FindAsync(id);
+            if (ticket == null) return NotFound();
+
+            _context.Tickets.Remove(ticket);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Ticket ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                ticket.FechaCreacion = DateTime.Now;
+                ticket.IdUsuario = ObtenerIdUsuarioActual();
+                ticket.IdEstado = 1; // Estado "Nuevo"
+
+                // Buscar el usuario de soporte con menos tickets abiertos
+                var soporteDisponible = await _context.Usuarios
+                    .Where(u => u.IdRol == 2)
+                    .OrderBy(u => _context.Tickets.Count(t => t.IdSoporteAsignado == u.IdUsuario && t.IdEstado != 3))
+                    .FirstOrDefaultAsync();
+
+                if (soporteDisponible != null)
+                {
+                    ticket.IdSoporteAsignado = soporteDisponible.IdUsuario;
+                }
+
+                _context.Add(ticket);
+                await _context.SaveChangesAsync();
+
+                // Obtener el ticket con las propiedades de navegación necesarias
+                var ticketCompleto = await _context.Tickets
+                    .Include(t => t.Usuario)
+                    .Include(t => t.OperadorAsignado)
+                    .FirstOrDefaultAsync(t => t.IdTicket == ticket.IdTicket);
+
+                // Enviar correo al creador del ticket
+                if (ticketCompleto.Usuario != null)
+                {
+                    string asunto = $"Ticket creado: {ticketCompleto.Titulo}";
+                    string cuerpo = $"Hola {ticketCompleto.Usuario.Nombre},\n\nTu ticket ha sido creado con éxito.";
+                    await _emailService.EnviarCorreoAsync(ticketCompleto.Usuario.Correo, asunto, cuerpo);
+                }
+
+                // Enviar correo al operador asignado
+                if (ticketCompleto.OperadorAsignado != null)
+                {
+                    string asunto = $"Nuevo ticket asignado: {ticketCompleto.Titulo}";
+                    string cuerpo = $"Hola {ticketCompleto.OperadorAsignado.Nombre},\n\nSe te ha asignado un nuevo ticket.";
+                    await _emailService.EnviarCorreoAsync(ticketCompleto.OperadorAsignado.Correo, asunto, cuerpo);
+                }
+
+                return RedirectToAction(nameof(MisTickets));
+            }
+
+            return View(ticket);
+        }
     }
 }

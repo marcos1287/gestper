@@ -1,44 +1,42 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Gestper.Models;
+using Gestper.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Gestper.Controllers
 {
-    public class HomeControllerTrabajador : Controller
+    public class TrabajadorController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeControllerTrabajador(ILogger<HomeController> logger)
+        public TrabajadorController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var tickets = new List<TicketAdmin>
-            {
-                new TicketAdmin()
-                {
-                    Id = 0,
-                    NombreConsulta = "NOMBRE CONSULTA",
-                    Descripcion = "Breve descripción para la consulta",
-                    Estado = "Nuevo",
-                    Prioridad = "Alta",
-                    Departamento = "Soporte",
-                    CreadoPor = "Usuario1",
-                    FechaCreacion = DateTime.Now
-                }
-            };
+            var tickets = await _context.Tickets
+                .Include(t => t.Estados)
+                .ToListAsync();
 
             return View("Index_Trabajador", tickets);
         }
 
-        public IActionResult Detalle(int id)
+        public async Task<IActionResult> Detalle(int id)
         {
-            var ticket = new TicketAdmin(); // Ticket vacío o uno cargado desde la base de datos
-            return View("Detalle_Trabajador", ticket); // Aquí usamos el nuevo nombre de la vista
-        }
+            var ticket = await _context.Tickets
+                .Include(t => t.Estados)
+                .FirstOrDefaultAsync(t => t.IdTicket == id);
 
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            return View("Detalle_Trabajador", ticket);
+        }
 
         public IActionResult Privacy()
         {

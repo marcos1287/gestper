@@ -1,92 +1,190 @@
-Gestper
+# Gestper 🚀
 
-Gestper es una aplicación web desarrollada como parte de un trabajo universitario. Su propósito es [aquí puedes agregar una descripción más detallada del objetivo de la aplicación, por ejemplo: "gestionar la información del personal de una organización de manera eficiente y segura"].
+> Aplicación web para la gestión eficiente del personal de organizaciones, desarrollada con ASP.NET Core MVC.
 
-Características
-Gestión de usuarios y roles.
-Creación, lectura, actualización y eliminación (CRUD) de registros.
-Interfaz de usuario intuitiva y responsiva.
-Autenticación y autorización de usuarios.
-[Agrega aquí otras funcionalidades destacadas de tu aplicación.]
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![.NET](https://img.shields.io/badge/.NET-9-512BD4)](https://dotnet.microsoft.com/download)
 
-Estructura del Proyecto
-El proyecto está organizado en los siguientes directorios principales:
-Controllers/: Contiene los controladores que manejan las solicitudes HTTP y la lógica de negocio.
-Models/: Define las clases que representan los datos y las entidades del dominio.
-Views/: Incluye las vistas que se renderizan en la interfaz de usuario.
-Data/: Configuración del contexto de la base de datos y las migraciones.
-wwwroot/: Archivos estáticos como CSS, JavaScript e imágenes.
-Properties/: Archivos de configuración del proyecto.
-Program.cs: Punto de entrada de la aplicación.
-appsettings.json: Archivo de configuración de la aplicación.
 
-Tecnologías Utilizadas
-Lenguaje de programación: C#
-Framework: ASP.NET Core MVC
-Base de datos: [Especifica la base de datos utilizada, por ejemplo: SQL Server, SQLite, etc.]
-Frontend: HTML, CSS, JavaScript
-Control de versiones: Git
 
-🧰 Requisitos Previos
-GitHub Desktop instalado: Descargar
-JetBrains Rider instalado: Descargar
-Cuenta en GitHub y haber iniciado sesión en GitHub Desktop.
-Tener instalado el SDK de .NET correspondiente al proyecto (por ejemplo, .NET 6 o .NET 7).
+## 📖 Descripción
 
-🚀 Clonar el Repositorio con GitHub Desktop
-Abrir GitHub Desktop.
-En la barra de menú, seleccionar Archivo > Clonar repositorio....
-En la pestaña URL, ingresar la URL del repositorio:
-bash
-Copiar
-Editar
-https://github.com/CesarValenzuela157/gestper.git
-Elegir la ubicación local donde se clonará el proyecto.
-Hacer clic en Clonar.
-Referencia: Clonar y bifurcar repositorios desde GitHub Desktop
+Gestper es una aplicación web desarrollada como parte de un trabajo universitario. Su propósito es gestionar la información del personal de una organización de manera eficiente y segura, ofreciendo una interfaz intuitiva y funcionalidades completas para la administración de recursos humanos.
 
-🧑‍💻 Abrir el Proyecto en JetBrains Rider
-Abrir JetBrains Rider.
-Seleccionar Archivo > Abrir... y navegar hasta la carpeta donde se clonó el proyecto.
-Seleccionar el archivo de solución .sln correspondiente al proyecto y hacer clic en Abrir.
-Si es la primera vez que se abre el proyecto, Rider puede preguntar si se confía en el proyecto. Seleccionar Confiar en el proyecto.
-Referencia: Clonar desde GitHub - Guía de JetBrains
+## ✨ Características
 
-⚙️ Ejecutar el Proyecto
-En Rider, asegurarse de que el proyecto se haya restaurado correctamente. Si es necesario, Rider puede solicitar restaurar los paquetes NuGet; aceptar la restauración.
-Configurar el proyecto de inicio si hay múltiples proyectos en la solución.
-Presionar Shift + F10 o hacer clic en el botón de ejecución (▶️) para compilar y ejecutar la aplicación.
-Una vez iniciada, la aplicación estará disponible en https://localhost:5001 o la URL que indique la consola.
+- **Gestión de usuarios y roles** - Control de acceso basado en permisos
+- **Operaciones CRUD completas** - Creación, lectura, actualización y eliminación de registros
+- **Interfaz responsiva** - Diseño adaptable a diferentes dispositivos
+- **Autenticación y autorización** - Sistema seguro de acceso a la plataforma
+- **Dashboard analítico** - Visualización de datos clave del personal
+- **Exportación de informes** - Generación de reportes en diferentes formatos
 
-🤝 Colaborar y Contribuir
-Crear una Rama para Trabajar
-En GitHub Desktop, ir a la pestaña Branch > New Branch....
-Nombrar la nueva rama (por ejemplo, feature/nueva-funcionalidad) y hacer clic en Create Branch.
-Realizar Cambios y Confirmarlos
-Abrir el proyecto en Rider y realizar los cambios necesarios.
-Una vez realizados los cambios, en GitHub Desktop, se mostrarán los archivos modificados.
-Ingresar un mensaje descriptivo en el campo Summary (por ejemplo, "Agrega nueva funcionalidad X").
-Hacer clic en Commit to feature/nueva-funcionalidad.
-Referencia: Confirmar y revisar cambios en tu proyecto en GitHub Desktop
-Enviar Cambios al Repositorio Remoto
-Después de confirmar los cambios, hacer clic en Push origin para enviar los cambios al repositorio en GitHub.
-Referencia: Enviar cambios a GitHub desde GitHub Desktop
-Crear una Solicitud de Extracción (Pull Request)
-En GitHub Desktop, después de enviar los cambios, hacer clic en Create Pull Request.
-Se abrirá una página en el navegador para completar los detalles de la solicitud de extracción.
-Ingresar un título y descripción para la solicitud, luego hacer clic en Create Pull Request.
+## 🛠️ Tecnologías Utilizadas
 
-🧪 Sincronizar Cambios del Repositorio Principal
-Para mantener tu rama actualizada con los últimos cambios del repositorio principal:
-En GitHub Desktop, cambiar a la rama main.
-Hacer clic en Fetch origin para obtener los últimos cambios.
-Cambiar de nuevo a tu rama de trabajo (por ejemplo, feature/nueva-funcionalidad).
-Hacer clic en Branch > Merge into current branch... y seleccionar main para fusionar los cambios.
+- **Backend:** C#, ASP.NET Core MVC
+- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap
+- **Base de datos:** SQL Server
+- **ORM:** Entity Framework Core
+- **Control de versiones:** Git
 
-📺 Recursos Adicionales
-Clonar un repositorio usando GitHub Desktop - Video Tutorial
-Crear y enviar un repositorio usando GitHub Desktop - Video Tutorial
-Si necesitas más detalles o asistencia adicional, no dudes en preguntar.
+## 🧰 Estructura del Proyecto
 
-Licencia
-Este proyecto está bajo la licencia MIT.
+```
+Gestper/
+├── Controllers/       # Controladores que manejan las solicitudes HTTP
+├── Models/            # Clases que representan los datos y entidades
+├── Views/             # Vistas para la interfaz de usuario
+├── Data/              # Contexto de la base de datos y migraciones
+├── wwwroot/           # Archivos estáticos (CSS, JS, imágenes)
+├── Properties/        # Archivos de configuración del proyecto
+├── Program.cs         # Punto de entrada de la aplicación
+└── appsettings.json   # Configuración de la aplicación
+```
+
+## 📋 Requisitos Previos
+
+Para trabajar con este proyecto, necesitarás tener instalado:
+
+- [.NET SDK](https://dotnet.microsoft.com/download) (.NET 6.0 o superior)
+- [GitHub Desktop](https://desktop.github.com/)
+- [JetBrains Rider](https://www.jetbrains.com/rider/) o [Visual Studio](https://visualstudio.microsoft.com/)
+- Una cuenta en GitHub
+
+## 🚀 Primeros Pasos
+
+### Clonar el Repositorio
+
+**Usando GitHub Desktop:**
+
+1. Abrir GitHub Desktop
+2. Seleccionar `Archivo > Clonar repositorio...`
+3. En la pestaña URL, ingresar: `https://github.com/CesarValenzuela157/gestper.git`
+4. Elegir la ubicación local para el proyecto
+5. Hacer clic en `Clonar`
+
+**Usando Git CLI:**
+
+```bash
+git clone https://github.com/CesarValenzuela157/gestper.git
+cd gestper
+```
+
+### Configurar y Ejecutar el Proyecto
+
+**Con JetBrains Rider:**
+
+1. Abrir JetBrains Rider
+2. Seleccionar `Archivo > Abrir...` y navegar hasta la carpeta del proyecto
+3. Abrir el archivo de solución `.sln`
+4. Restaurar los paquetes NuGet (Rider suele hacerlo automáticamente)
+5. Presionar `Shift + F10` o hacer clic en el botón de ejecución para iniciar la aplicación
+
+**Con Visual Studio:**
+
+1. Abrir Visual Studio
+2. Seleccionar `Archivo > Abrir > Proyecto/Solución` y navegar hasta la carpeta del proyecto
+3. Abrir el archivo de solución `.sln`
+4. Hacer clic derecho en la solución en el Explorador de soluciones y seleccionar `Restaurar paquetes NuGet`
+5. Presionar `F5` para compilar y ejecutar la aplicación
+
+**Con .NET CLI:**
+
+```bash
+dotnet restore
+dotnet build
+dotnet run
+```
+
+La aplicación estará disponible en `https://localhost:5001` o la URL que indique la consola.
+
+## 🤝 Cómo Contribuir
+
+### 1. Crear una Rama
+
+**Con GitHub Desktop:**
+
+1. Ir a `Branch > New Branch...`
+2. Nombrar la rama (ej. `feature/nueva-funcionalidad`)
+3. Hacer clic en `Create Branch`
+
+**Con Git CLI:**
+
+```bash
+git checkout -b feature/nueva-funcionalidad
+```
+
+### 2. Realizar Cambios
+
+1. Implementa los cambios necesarios en el código
+2. Prueba tus cambios localmente
+
+### 3. Confirmar Cambios
+
+**Con GitHub Desktop:**
+
+1. Revisa los archivos modificados
+2. Escribe un mensaje descriptivo en el campo `Summary`
+3. Haz clic en `Commit to feature/nueva-funcionalidad`
+
+**Con Git CLI:**
+
+```bash
+git add .
+git commit -m "Descripción detallada de los cambios realizados"
+```
+
+### 4. Enviar Cambios al Repositorio Remoto
+
+**Con GitHub Desktop:**
+
+1. Hacer clic en `Push origin`
+
+**Con Git CLI:**
+
+```bash
+git push origin feature/nueva-funcionalidad
+```
+
+### 5. Crear un Pull Request
+
+1. En GitHub, navega al repositorio
+2. Haz clic en `Compare & pull request`
+3. Completa la información requerida
+4. Haz clic en `Create pull request`
+
+## 🧪 Mantener tu Rama Actualizada
+
+Para sincronizar tu rama con los últimos cambios de la rama principal:
+
+**Con GitHub Desktop:**
+
+1. Cambiar a la rama `main`
+2. Hacer clic en `Fetch origin`
+3. Cambiar de nuevo a tu rama de trabajo
+4. Hacer clic en `Branch > Merge into current branch...` y seleccionar `main`
+
+**Con Git CLI:**
+
+```bash
+git checkout main
+git pull
+git checkout feature/nueva-funcionalidad
+git merge main
+```
+
+## 📚 Recursos Adicionales
+
+- [Documentación de ASP.NET Core](https://docs.microsoft.com/es-es/aspnet/core/)
+- [Tutoriales de GitHub Desktop](https://docs.github.com/es/desktop)
+- [Guía de Entity Framework Core](https://docs.microsoft.com/es-es/ef/core/)
+- [Clonar un repositorio usando GitHub Desktop - Video Tutorial](https://www.youtube.com/watch?v=PoZJGJvOlVc)
+
+## 🔒 Licencia
+
+Este proyecto está bajo la [Licencia MIT](LICENSE).
+
+
+<p align="center">
+  Desarrollado con ❤️ como parte de un proyecto universitario
+</p>

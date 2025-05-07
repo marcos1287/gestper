@@ -1,31 +1,51 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Gestper.Models;
-
-public class Ticket
+namespace Gestper.Models
 {
-    [Key] public int IdTicket { get; set; }
-    public string Titulo { get; set; }
-    public string Descripcion { get; set; }
-    public DateTime FechaCreacion { get; set; }
-    public int IdUsuario { get; set; }
-    public int IdEstado { get; set; }
+    public class Ticket
+    {
+        [Key]
+        public int IdTicket { get; set; }
 
-    public int IdCategoria { get; set; }
-    public int IdPrioridad { get; set; }
-    public int IdDepartamento { get; set; }
+        [Required]
+        public string Titulo { get; set; }
 
+        [Required]
+        public string Descripcion { get; set; }
 
+        [Required]
+        public DateTime FechaCreacion { get; set; }
 
-public int? IdSoporteAsignado { get; set; }
-    public virtual Usuario SoporteAsignado { get; set; }
-        
-    // Propiedades de navegación
-    public virtual Usuario Usuario { get; set; } 
-    public virtual Usuario OperadorAsignado { get; set; } 
-    public virtual Estado Estados { get; set; }
-    public virtual Categoria Categorias { get; set; }
-    public virtual Prioridad Prioridades { get; set; }
-    public virtual Departamento Departamentos { get; set; }
-        
+        [Required]
+        public int IdUsuario { get; set; }
+
+        [Required]
+        public int IdEstado { get; set; }
+
+        [Required]
+        public int IdCategoria { get; set; }
+
+        [Required]
+        public int IdPrioridad { get; set; }
+
+        [Required]
+        public int IdDepartamento { get; set; }
+
+        // Relaciones (navegación)
+        [ForeignKey("IdUsuario")]
+        public virtual Usuario Usuario { get; set; }
+
+        [ForeignKey("IdEstado")]
+        public virtual Estado Estado { get; set; }
+
+        [ForeignKey("IdCategoria")]
+        public virtual Categoria Categoria { get; set; }
+
+        [ForeignKey("IdPrioridad")]
+        public virtual Prioridad Prioridad { get; set; }
+
+        [ForeignKey("IdDepartamento")]
+        public virtual Departamento Departamento { get; set; }
+    }
 }

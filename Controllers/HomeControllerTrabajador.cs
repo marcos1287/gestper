@@ -18,7 +18,7 @@ namespace Gestper.Controllers
         public async Task<IActionResult> Index()
         {
             var tickets = await _context.Tickets
-                .Include(t => t.Estados)
+                .Include(t => t.Estado)
                 .ToListAsync();
 
             return View("Index_Trabajador", tickets);
@@ -27,7 +27,7 @@ namespace Gestper.Controllers
         public async Task<IActionResult> Detalle(int id)
         {
             var ticket = await _context.Tickets
-                .Include(t => t.Estados)
+                .Include(t => t.Estado)
                 .FirstOrDefaultAsync(t => t.IdTicket == id);
 
             if (ticket == null)

@@ -32,10 +32,10 @@
                             <tr>
                                 <td>@Ticket.Titulo</td>
                                 <td>@Ticket.Descripcion</td>
-                                <td>@Ticket.Estados?.NombreEstados</td>  
-                                <td>@Ticket.Categorias?.Nombre</td>  
-                                <td>@Ticket.Prioridades?.NombrePrioridad</td>  
-                                <td>@Ticket.Departamentos?.Nombre</td>  
+                                <td>@Ticket.Estado?.NombreEstado</td>  
+                                <td>@Ticket.Categoria?.Nombre</td>  
+                                <td>@Ticket.Prioridad?.NombrePrioridad</td>  
+                                <td>@Ticket.Departamento?.Nombre</td>  
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@Ticket.IdTicket" class="btn btn-warning btn-sm">Editar</a>
                                     <a asp-action="Delete" asp-route-id="@Ticket.IdTicket" class="btn btn-danger btn-sm">Eliminar</a>

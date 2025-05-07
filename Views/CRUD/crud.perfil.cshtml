@@ -135,81 +135,104 @@
             background-color: #dc3545;
             color: white;
         }
+
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 10px;
+            background-color: #f5f5f5;
+            height: 50px;
+            align-items: center;
+        }
+
+        .logout-form {
+            margin: 0;
+        }
+
+        .logout-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #0056b3;
+        }
+        
     </style>
 </head>
 <body>
-    <!-- Barra lateral -->
-    <div class="sidebar">
-        <h3 style="text-align: center;">Gestper</h3>
-        <a href="/Perfil">Perfil</a>
-        <a href="/Ticket">Ticket</a>
-        <a href="/Ticket/Lista">Lista de Ticket</a>
+<!-- Barra lateral -->
+<div class="sidebar">
+    <h3 style="text-align: center;">Gestper</h3>
+    <a href="/Perfil">Perfil</a>
+    <a href="/Ticket">Ticket</a>
+    <a href="/Ticket/Lista">Lista de Ticket</a>
+</div>
+
+<!-- Contenido principal -->
+<div class="main">
+    <!-- Navbar superior -->
+    <div class="navbar">
+        <form method="post" asp-controller="Usuario" asp-action="CerrarSesion">
+            <button type="submit" class="logout-button">Cerrar sesión</button>
+        </form>
     </div>
 
-    <!-- Contenido principal -->
-    <div class="main">
-        <!-- Navbar superior -->
-        <div class="navbar">
-            <div class="nav-links">
-                <a href="/Perfil">Perfil</a>
-                <a href="/Ticket">Ticket</a>
-                <a href="/Ticket/Lista">Lista de Ticket</a>
-            </div>
-            <form method="post" asp-controller="Usuario" asp-action="CerrarSesion">
-                <button type="submit" class="logout-button">Cerrar sesión</button>
-            </form>
+    <!-- Contenido de perfil -->
+    <h2>Mi Perfil</h2>
+
+    <div class="card">
+        <div class="card-header">
+            <h2>Información Personal</h2>
         </div>
-
-        <!-- Contenido de perfil -->
-        <h2>Mi Perfil</h2>
-
-        <div class="card">
-            <div class="card-header">
-                <h2>Información Personal</h2>
+        <div class="card-body">
+            <div class="text-center mb-4">
+                <img src="~/images/profile-placeholder.png" alt="Foto de perfil" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
+                <h3 class="mt-3">@Model.Nombre @Model.Apellido</h3>
+                <p>
+                    @if (Model.Activo)
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactivo</span>
+                    }
+                </p>
             </div>
-            <div class="card-body">
-                <div class="text-center mb-4">
-                    <img src="~/images/profile-placeholder.png" alt="Foto de perfil" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;" />
-                    <h3 class="mt-3">@Model.Nombre @Model.Apellido</h3>
-                    <p>
-                        @if (Model.Activo)
-                        {
-                            <span class="badge bg-success">Activo</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-danger">Inactivo</span>
-                        }
-                    </p>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <h5>Nombre</h5>
-                        <p>@Model.Nombre</p>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <h5>Apellido</h5>
-                        <p>@Model.Apellido</p>
-                    </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <h5>Nombre</h5>
+                    <p>@Model.Nombre</p>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <h5>Apellido</h5>
+                    <p>@Model.Apellido</p>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <h5>Correo Electrónico</h5>
-                        <p>@Model.Correo</p>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <h5>Teléfono</h5>
-                        <p>@Model.Telefono</p>
-                    </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <h5>Correo Electrónico</h5>
+                    <p>@Model.Correo</p>
                 </div>
+                <div class="col-md-6 mb-3">
+                    <h5>Teléfono</h5>
+                    <p>@Model.Telefono</p>
+                </div>
+            </div>
 
-                <div class="text-center mt-3">
-                    <a href="/Perfil/Editar" class="btn btn-primary">Editar Perfil</a>
-                </div>
+            <div class="text-center mt-3">
+                <a href="/Perfil/Editar" class="btn btn-primary">Editar Perfil</a>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
+

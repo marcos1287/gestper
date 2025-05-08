@@ -24,8 +24,9 @@ namespace Gestper.Controllers
 
         private int ObtenerIdUsuarioActual()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            return string.IsNullOrEmpty(userId) ? 0 : int.Parse(userId);
+            var correo = HttpContext.Session.GetString("UsuarioCorreo");
+            var usuario = _context.Usuarios.FirstOrDefault(u => u.Correo == correo);
+            return usuario?.IdUsuario ?? 0;
         }
 
         public async Task<IActionResult> Index()
@@ -37,7 +38,7 @@ namespace Gestper.Controllers
                 .Include(t => t.Departamento)
                 .ToListAsync();
 
-            return View("Views/tickets/tickets.cshtml");
+            return View();
         }
 
         public IActionResult MisTickets()
@@ -61,7 +62,7 @@ namespace Gestper.Controllers
                 return RedirectToAction("Create", "Ticket");
             }
 
-            return View(ticketsCliente);
+            return View("Views/CRUD/crud.ticket.cshtml", ticketsCliente);
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -126,12 +127,22 @@ namespace Gestper.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Categorias = new SelectList(_context.Categorias, "IdCategoria", "Nombre");
-            ViewBag.Prioridades = new SelectList(_context.Prioridades, "IdPrioridad", "Nombre");
-            ViewBag.Departamentos = new SelectList(_context.Departamentos, "IdDepartamento", "Nombre");
+            var estados = _context.Estados.ToList();
+            var categorias = _context.Categorias.ToList();
+            var prioridades = _context.Prioridades.ToList();
+            var departamentos = _context.Departamentos.ToList();
+
+            if (!estados.Any() || !categorias.Any() || !prioridades.Any() || !departamentos.Any())
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
+            ViewBag.Estados = new SelectList(estados, "IdEstado", "NombreEstado");
+            ViewBag.Categorias = new SelectList(categorias, "IdCategoria", "Nombre");
+            ViewBag.Prioridades = new SelectList(prioridades, "IdPrioridad", "NombrePrioridad");
+            ViewBag.Departamentos = new SelectList(departamentos, "IdDepartamento", "Nombre");
 
             return View();
         }
@@ -144,37 +155,45 @@ namespace Gestper.Controllers
             if (ModelState.IsValid)
             {
                 ticket.FechaCreacion = DateTime.Now;
-                ticket.IdUsuario = ObtenerIdUsuarioActual();
                 ticket.IdEstado = 1; // Estado "Abierto"
+                ticket.IdPrioridad = 2; // Media (asignado automáticamente)
 
-                // Buscar el trabajador (IdRol = 2) con menos tickets abiertos
-                var soporteDisponible = await _context.Usuarios
-                    .Where(u => u.IdRol == 2)
-                    .OrderBy(u => _context.Tickets.Count(t => t.IdUsuario == u.IdUsuario && t.IdEstado != 3))
-                    .FirstOrDefaultAsync();
+                var correo = HttpContext.Session.GetString("UsuarioCorreo");
+                var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == correo);
 
-                // Nota: Ya no se asigna ningún soporte porque no hay campo en la tabla Tickets
-
-                _context.Add(ticket);
-                await _context.SaveChangesAsync();
-
-                // Obtener ticket completo con usuario para enviar correo
-                var ticketCompleto = await _context.Tickets
-                    .Include(t => t.Usuario)
-                    .FirstOrDefaultAsync(t => t.IdTicket == ticket.IdTicket);
-
-                if (ticketCompleto?.Usuario != null)
+                if (usuario == null)
                 {
-                    string asunto = $"Ticket creado: {ticketCompleto.Titulo}";
-                    string cuerpo = $"Hola {ticketCompleto.Usuario.Nombre},\n\nTu ticket ha sido creado con éxito.";
-                    await _emailService.EnviarCorreoAsync(ticketCompleto.Usuario.Correo, asunto, cuerpo);
+                    TempData["LoginError"] = "Debe iniciar sesión para crear un ticket.";
+                    return RedirectToAction("Index", "Home");
                 }
 
-                return RedirectToAction(nameof(MisTickets));
+                ticket.IdUsuario = usuario.IdUsuario;
+
+                // Asignar trabajador con menos tickets abiertos
+                var tecnico = await _context.Usuarios
+                    .Where(u => u.IdRol == 2)
+                    .OrderBy(u => _context.Tickets.Count(t => t.IdSoporteAsignado == u.IdUsuario && t.IdEstado != 3))
+                    .FirstOrDefaultAsync();
+
+                if (tecnico != null)
+                {
+                    ticket.IdSoporteAsignado = tecnico.IdUsuario;
+                }
+
+                _context.Tickets.Add(ticket);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Ticket creado exitosamente.";
+                return RedirectToAction("MisTickets");
             }
+
+            // Solo recargas los combos visibles
+            ViewBag.Categorias =
+                new SelectList(_context.Categorias.ToList(), "IdCategoria", "Nombre", ticket.IdCategoria);
+            ViewBag.Departamentos = new SelectList(_context.Departamentos.ToList(), "IdDepartamento", "Nombre",
+                ticket.IdDepartamento);
 
             return View(ticket);
         }
-
     }
 }

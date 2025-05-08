@@ -53,39 +53,38 @@ namespace Gestper.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Buscar al usuario en la base de datos por correo
                 var usuario = await _context.Usuarios
                     .FirstOrDefaultAsync(u => u.Correo == model.Correo);
 
-                // Si el usuario existe
-                if (ModelState.IsValid)
+                if (usuario.Contrasena == model.Contrasena)
                 {
-                    // Verificar la contraseña (deberías encriptar las contraseñas en un entorno real)
-                    if (usuario.Contrasena == model.Contrasena)
-                    {
-                        // Guardar información del usuario en la sesión
-                        HttpContext.Session.SetString("UsuarioCorreo", usuario.Correo);
-                        HttpContext.Session.SetString("UsuarioId", usuario.IdUsuario.ToString());
+                    HttpContext.Session.SetString("UsuarioCorreo", usuario.Correo);
+                    HttpContext.Session.SetString("UsuarioId", usuario.IdUsuario.ToString());
+                    HttpContext.Session.SetString("UsuarioRol", usuario.IdRol.ToString());
 
-                        // Redirigir al perfil del usuario
-                        return RedirectToAction("Index", "CRUD");
+                    // Redirección según el rol
+                    if (usuario.IdRol == 1)
+                    {
+                        return RedirectToAction("Index", "HomeControllerAdmin");
+                    }
+                    else if (usuario.IdRol == 2)
+                    {
+                        return RedirectToAction("Index", "Trabajador");
                     }
                     else
                     {
-                        // Si la contraseña no es correcta
-                        ModelState.AddModelError(string.Empty, "Contraseña incorrecta.");
+                        return RedirectToAction("Index", "CRUD");
                     }
                 }
                 else
                 {
-                    // Si no se encuentra al usuario
                     ModelState.AddModelError(string.Empty, "Usuario no encontrado.");
                 }
             }
 
-            // Si algo falla, volvemos a mostrar el formulario de login con el error
             return View("Views/login/login.layout.cshtml", model);
         }
+        
         [HttpPost]
         public IActionResult CerrarSesion()
         {

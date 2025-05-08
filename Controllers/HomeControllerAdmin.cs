@@ -14,24 +14,61 @@ namespace Gestper.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? idDepartamento, int? idEstado, int? idPrioridad, int? idBusqueda)
         {
-            var tickets = await _context.Tickets
+            if (HttpContext.Session.GetString("UsuarioRol") != "1")
+                return RedirectToAction("Login", "Usuario");
+
+            var ticketsQuery = _context.Tickets
+                .Include(t => t.Usuario)
+                .AsQueryable();
+
+            if (idDepartamento.HasValue)
+                ticketsQuery = ticketsQuery.Where(t => t.IdDepartamento == idDepartamento);
+
+            if (idEstado.HasValue)
+                ticketsQuery = ticketsQuery.Where(t => t.IdEstado == idEstado);
+
+            if (idPrioridad.HasValue)
+                ticketsQuery = ticketsQuery.Where(t => t.IdPrioridad == idPrioridad);
+
+            if (idBusqueda.HasValue)
+                ticketsQuery = ticketsQuery.Where(t => t.IdTicket == idBusqueda);
+
+            var tickets = await ticketsQuery
                 .OrderByDescending(t => t.FechaCreacion)
                 .ToListAsync();
 
-            return View("IndexAdmin", tickets);
+            ViewBag.Total = tickets.Count;
+            ViewBag.Nuevos = tickets.Count(t => t.IdEstado == 1);
+            ViewBag.EnProgreso = tickets.Count(t => t.IdEstado == 2);
+            ViewBag.Cerrados = tickets.Count(t => t.IdEstado == 3);
+
+            ViewBag.Departamentos = await _context.Departamentos.ToListAsync();
+
+            return View("~/Views/Home/IndexAdmin.cshtml", tickets);
+        }
+        
+        [HttpPost]
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Usuario");
         }
 
         public async Task<IActionResult> Detalle(int id)
         {
             var ticket = await _context.Tickets
+                .Include(t => t.Usuario)
+                .Include(t => t.Estado)
+                .Include(t => t.Prioridad)
+                .Include(t => t.SoporteAsignado)
                 .FirstOrDefaultAsync(t => t.IdTicket == id);
 
             if (ticket == null)
                 return NotFound();
 
-            return View("DetalleTicket", ticket);
+            return View("~/Views/Home/DetalleTicket.cshtml", ticket);
         }
     }
 }

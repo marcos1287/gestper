@@ -2,14 +2,14 @@
 
 @{
     Layout = null;
-    ViewData["Title"] = "Crear Ticket";
+    ViewData["Title"] = "Editar Ticket";
 }
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Crear Ticket</title>
+    <title>Editar Ticket</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
@@ -22,10 +22,12 @@
 
     <div class="main">
         <div class="titulo-barra">
-            <h2>Crear Ticket</h2>
+            <h2>Editar Ticket</h2>
         </div>
 
-        <form asp-action="Create" method="post">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="IdTicket" />
+
             <div class="form-group">
                 <label asp-for="Titulo" class="control-label"></label>
                 <input asp-for="Titulo" class="form-control" />
@@ -39,36 +41,33 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="IdCategoria" class="control-label">Categoría</label>
+                <label asp-for="IdCategoria">Categoría</label>
                 <select asp-for="IdCategoria" class="form-control" asp-items="ViewBag.Categorias"></select>
-                <span asp-validation-for="IdCategoria" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="IdDepartamento" class="control-label">Departamento</label>
+                <label asp-for="IdDepartamento">Departamento</label>
                 <select asp-for="IdDepartamento" class="form-control" asp-items="ViewBag.Departamentos"></select>
-                <span asp-validation-for="IdDepartamento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdPrioridad">Prioridad</label>
+                <select asp-for="IdPrioridad" class="form-control" asp-items="ViewBag.Prioridades"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IdEstado">Estado</label>
+                <select asp-for="IdEstado" class="form-control" asp-items="ViewBag.Estados"></select>
             </div>
 
             <div class="form-buttons">
-                <button type="submit" class="btn btn-guardar">Guardar</button>
-                <a asp-action="Index" class="btn btn-cancelar">Cancelar</a>
+                <button type="submit" class="btn btn-guardar">Guardar Cambios</button>
+                <a asp-action="Lista" class="btn btn-cancelar">Cancelar</a>
             </div>
         </form>
     </div>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #eef6ff;
-        }
-
         .sidebar {
             width: 250px;
             background-color: #007BFF;
@@ -91,34 +90,24 @@
             color: white;
             padding: 12px 20px;
             text-decoration: none;
-            transition: background-color 0.2s ease;
+            font-size: 18px;
         }
 
         .sidebar a:hover {
             background-color: #0056b3;
         }
 
-        .sidebar a.active {
-            background-color: #0056b3;
-            font-weight: bold;
-        }
-
         .main {
-            margin-left: 260px;
+            margin-left: 250px;
             padding: 30px 40px;
-        }
-
-        .titulo-barra {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
+            background-color: #f0f8ff;
+            min-height: 100vh;
         }
 
         .titulo-barra h2 {
             font-size: 32px;
             font-weight: bold;
-            margin: 0;
+            margin-bottom: 25px;
         }
 
         .form-group {
@@ -160,8 +149,7 @@
             color: #dc3545;
             font-size: 14px;
         }
-    </style>
 
-    
+    </style>
 </body>
 </html>

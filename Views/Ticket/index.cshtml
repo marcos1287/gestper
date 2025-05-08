@@ -2,16 +2,25 @@
 
 @{
     ViewBag.Title = "Listado de Tickets";
-    Layout = "~/Views/Shared/_Layout.cshtml"; // Asegúrate que tu layout esté en esta ruta
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container py-5">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+    }
+
     <div class="row justify-content-center">
         <div class="col-lg-10">
             <h1 class="text-primary mb-4">Listado de Tickets</h1>
             <p class="mb-4">Aquí puedes ver todos los tickets registrados en el sistema.</p>
 
-            @if (!Model.Any())
+            @if (Model == null || !Model.Any())
             {
                 <div class="alert alert-info">No hay tickets registrados actualmente.</div>
             }

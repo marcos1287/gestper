@@ -1,7 +1,14 @@
-namespace Gestper.Models;
+using System.ComponentModel.DataAnnotations;
 
-public class LoginViewModel
+namespace Gestper.Models
 {
-    public string Correo { get; set; }
-    public string Contrasena { get; set; }
+    public class LoginViewModel
+    {
+        [Required(ErrorMessage = "El correo es obligatorio")]
+        [EmailAddress(ErrorMessage = "Ingrese un correo válido")]
+        public string Correo { get; set; }
+
+        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        public string Contrasena { get; set; }
+    }
 }

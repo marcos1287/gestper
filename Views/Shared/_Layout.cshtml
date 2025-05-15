@@ -46,7 +46,7 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Contacto" asp-action="Contacto">Contacto</a>
                     </li>
-                    @if (!(ViewContext.RouteData.Values["controller"]?.ToString() == "Usuario" && // Desaparece el boton de iniciar sesion una vez pulsado
+                    @if (!(ViewContext.RouteData.Values["controller"]?.ToString() == "Usuario" && // Desaparece el boton de iniciar sesion  una vez pulsado
                            ViewContext.RouteData.Values["action"]?.ToString() == "Login")) 
                     {
                         <li class="nav-item ms-lg-3">

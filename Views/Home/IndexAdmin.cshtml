@@ -30,9 +30,33 @@
             color: white;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 0 20px;
             font-size: 24px;
             font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .logout-btn i {
+            margin-right: 8px;
+            font-size: 16px;
         }
 
         .container {
@@ -271,6 +295,17 @@
             color: #666;
         }
 
+        .creator-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .creator-phone {
+            font-size: 12px;
+            color: #666;
+            margin-top: 2px;
+        }
+
         .ticket-title {
             font-size: 16px;
             font-weight: 500;
@@ -323,7 +358,12 @@
 </head>
 <body>
     <div class="top-bar">
-        GESTPER
+        <div>GESTPER</div>
+        <form asp-controller="Usuario" asp-action="CerrarSesion" method="post">
+            <button type="submit" class="logout-btn">
+                <i>⮐</i> Cerrar sesión
+            </button>
+        </form>
     </div>
 
     <div class="container">
@@ -454,7 +494,10 @@
                         <a href="@Url.Action("Detalle", "HomeControllerAdmin", new { id = ticket.IdTicket })" class="ticket-item">
                             <div class="ticket-header">
                                 <div class="ticket-id">Ticket #@ticket.IdTicket</div>
-                                <div class="ticket-creator">@ticket.Usuario?.Nombre @ticket.Usuario?.Apellido</div>
+                                <div class="ticket-creator">
+                                    <div class="creator-name">@ticket.Usuario?.Nombre @ticket.Usuario?.Apellido</div>
+                                    <div class="creator-phone">Tel: @ticket.Usuario?.Telefono</div>
+                                </div>
                             </div>
                             <div class="ticket-title">@ticket.Titulo</div>
                             <div class="ticket-meta">

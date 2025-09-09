@@ -27,6 +27,16 @@ namespace Gestper.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registrar(Usuario usuario)
         {
+            // Verificar si ya existe un correo igual
+            var correoExistente = await _context.Usuarios
+                .AnyAsync(u => u.Correo == usuario.Correo);
+
+            if (correoExistente)
+            {
+                ModelState.AddModelError("Correo", "Este correo ya está registrado.");
+                return View("Views/registro/registro.layout.cshtml", usuario);
+            }
+
             if (ModelState.IsValid)
             {
                 usuario.IdRol = 3; // Rol usuario normal
@@ -40,6 +50,7 @@ namespace Gestper.Controllers
 
             return View("Views/registro/registro.layout.cshtml", usuario);
         }
+
 
         // GET: Usuario/Login
         public IActionResult Login()
@@ -63,7 +74,7 @@ namespace Gestper.Controllers
             if (usuario != null && usuario.Contrasena == model.Contrasena)
             {
                 HttpContext.Session.SetString("UsuarioCorreo", usuario.Correo);
-                HttpContext.Session.SetString("UsuarioId", usuario.IdUsuario.ToString());
+                HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
                 HttpContext.Session.SetString("UsuarioRol", usuario.IdRol.ToString());
 
                 return usuario.IdRol switch
